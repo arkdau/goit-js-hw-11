@@ -48,7 +48,37 @@ import Notiflix from 'notiflix';
 //     };
 // }
 
-function render(hits, total, totalHits) {
+const status ={
+  // total:0,
+  totalHits:0,
+  tatalPage:0,
+  page:0,
+  query:'',
+  setTotalHits(total) {
+    this.totalHits = total;
+    this.setTotalPage();
+  },
+  setTotalPage() {
+    this.tatalPage = Math.ceil((this.totalHits / 40));
+  },
+  nextPage() {
+    if (this.page < this.tatalPage) {
+      this.page +=1;
+    }else {
+      this.page = 1;
+    }
+    return this.page;
+  },
+  getTotalPage() {
+    this.setTotalPage();
+      return this.tatalPage;
+    },
+  getPage() {
+      return this.page;
+  },
+};
+
+function render(hits) {
 
 
   // clear();
@@ -56,15 +86,13 @@ function render(hits, total, totalHits) {
   const gallery = document.createElement('div')
   gallery.setAttribute('class', 'gallery');
 
-  // catInfo.setAttribute('class', 'cat-info');
-  // catInfo.setAttribute('Style', 'Display: inline-flex; ');
   console.log('gallery: ', gallery);
 
 
 hits.forEach((item) => {
 
   const markupCard =      `<div class="photo-card">
-                             <img src="${item.webformatURL}" alt="" loading="lazy" width="480px"; height="480px"/>
+                             <img src="${item.webformatURL}" alt="" loading="lazy" width="450px"; height="450px"/>
                              <div class="info">
                                <p class="info-item">
                                  <b>Likes</b>
@@ -116,21 +144,25 @@ gallery.querySelectorAll('.info-item-value').forEach((item) => {
 }
 
 
+
+
 const msgForm = document.querySelector('.search-form');
 
 msgForm.addEventListener("submit", (e) => {
   let q;
   e.preventDefault();
   const form = e.currentTarget;
-  console.log(form);
+  // console.log(form);
   q = form.elements.searchQuery.value;
 
   if (q === '') {
     alert('email adres - puste pole.\nUzupełnij brakujące dane.');
   }else {
     form.reset();
-    console.log(q);
-    fetchImages(q)
+    // console.log(q);
+    status.query = q;
+    status.page = 1;
+    fetchImages(status.query, status.page)
     .then((value) => {
         ////////////////////////////////////////////////////
         const total = value.total;
@@ -145,17 +177,28 @@ msgForm.addEventListener("submit", (e) => {
           const views = value.hits[0].views;
           const comments = value.hits[0].comments;
           const downloads = value.hits[0].downloads;
-          console.log('total: ', value.total);
-          console.log('total hits: ',value.totalHits);
-          console.log('webformatURL: ', value.hits[0].webformatURL);
-          console.log('largeImageURL: ', value.hits[0].largeImageURL);
-          console.log('tags: ', value.hits[0].tags);
-          console.log('likes: ', value.hits[0].likes);
-          console.log('views: ', value.hits[0].views);
-          console.log('comments: ', value.hits[0].comments);
-          console.log('downloads: ', value.hits[0].downloads);
+          status.setTotalHits(totalHits);
+          // status.setTotalPage();
+          // console.log('TOTAL HITS', status.totalHits);
+          // console.log('TOTAL PAGE', status.page);
+          // status.nextPage();
+          // console.log('TOTAL PAGE', status.page);
+          // status.nextPage();
+          console.log('TOTAL PAGE: ', status.tatalPage);
+          console.log('PAGE: ',status.page)
+
+          // console.log('value: ', value);
+          // console.log('total: ', value.total);
+          // console.log('total hits: ',value.totalHits);
+          // console.log('webformatURL: ', value.hits[0].webformatURL);
+          // console.log('largeImageURL: ', value.hits[0].largeImageURL);
+          // console.log('tags: ', value.hits[0].tags);
+          // console.log('likes: ', value.hits[0].likes);
+          // console.log('views: ', value.hits[0].views);
+          // console.log('comments: ', value.hits[0].comments);
+          // console.log('downloads: ', value.hits[0].downloads);
           // render(value.hits[0].webformatURL);
-          render(hits, total, totalHits);
+          render(hits);
         }else {
           Notify.info(`Sorry, there are no images "${q}" matching your search query. Please try again`);
         };
@@ -167,3 +210,56 @@ msgForm.addEventListener("submit", (e) => {
       });
   };
 });
+
+
+const btn = document.querySelector('.load-more');
+btn.addEventListener('click', () => {
+  // console.log('TOTAL PAGES: ', status.tatalPage);
+  // console.log('PAGE: ', status.page);
+  status.nextPage();
+  fetchImages(status.query, status.page)
+    .then((value) => {
+      ////////////////////////////////////////////////////
+      const total = value.total;
+      if (total !== 0) {
+        const hits = value.hits;
+        const total = value.total;
+        const totalHits = value.totalHits;
+        const webformatURL = value.hits[0].webformatURL;
+        const largeImageURL = value.hits[0].largeImageURL;
+        const tags = value.hits[0].tags;
+        const likes = value.hits[0].likes;
+        const views = value.hits[0].views;
+        const comments = value.hits[0].comments;
+        const downloads = value.hits[0].downloads;
+        // status.setTotalHits(totalHits);
+        // status.setTotalPage();
+        // console.log('TOTAL HITS', status.totalHits);
+        // console.log('TOTAL PAGE', status.page);
+        // status.nextPage();
+        // console.log('TOTAL PAGE', status.page);
+        // status.nextPage();
+        console.log('TOTAL PAGE: ', status.tatalPage);
+        console.log('PAGE: ', status.page);
+        // console.log('value: ', value);
+        // console.log('total: ', value.total);
+        // console.log('total hits: ',value.totalHits);
+        // console.log('webformatURL: ', value.hits[0].webformatURL);
+        // console.log('largeImageURL: ', value.hits[0].largeImageURL);
+        // console.log('tags: ', value.hits[0].tags);
+        // console.log('likes: ', value.hits[0].likes);
+        // console.log('views: ', value.hits[0].views);
+        // console.log('comments: ', value.hits[0].comments);
+        // console.log('downloads: ', value.hits[0].downloads);
+        // render(value.hits[0].webformatURL);
+        render(hits);
+      }else {
+        Notify.info(`Sorry, there are no images "${q}" matching your search query. Please try again`);
+      };
+    })
+    .catch((error) => {
+      // msgError();
+      console.log(error);
+      Notify.failure(error.message);
+    })
+  });

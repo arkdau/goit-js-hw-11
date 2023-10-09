@@ -48,9 +48,10 @@ const config = {
 
 // Making a GET request using an axios instance from a connected library
 
-export function fetchImages(q) {
+export function fetchImages(q, page) {
 
-  console.log(q);
+
+  console.log(page);
 
 //https://pixabay.com/api/?key=39898050-fc2f5ee7469f143421985ee86&q=yellow+flowers&image_type=photo
 // return  axios.get(`${BASE_API_URL}/images/search?breed_ids=${breedId}`, config)
@@ -59,7 +60,7 @@ export function fetchImages(q) {
 
   // https://pixabay.com/api/?key=${API_KEY}&q=travel&image_type=photo&pretty=true`
 
-return  axios.get(`${BASE_API_URL}/?key=${key}&q=${q}&image_type=${image_type}`)
+return  axios.get(`${BASE_API_URL}/?key=${key}&q=${q}&image_type=${image_type}&per_page=40&page=${page}`)
     .then(function (response) {
         return response.data;
     })
