@@ -2,8 +2,8 @@ import axios from "axios";
 
 const key = "39898050-fc2f5ee7469f143421985ee86";
 const image_type = 'photo';
-const orientation = 'horizontal';
-const safesearch = true;
+// const orientation = 'horizontal';
+// const safesearch = true;
 
 //////////////////////////////////////////////////////////////////////////////////
 // axios.defaults.headers.common["x-api-key"] = "39898050-fc2f5ee7469f143421985ee86";
@@ -15,26 +15,26 @@ const BASE_API_URL = 'https://pixabay.com/api';
 
 // a fallback value for allowed_origin we will send to the response header
 
-$allowed_origin = 'http://localhost:1234';
+// $allowed_origin = 'http://localhost:1234';
 
 
 
-const API_REQUEST_HEADERS = {
-   'Content-Type': 'application/json',
-   'Access-Control-Allow-Origin': `${$allowed_origin}`,
-   'Access-Control-Allow-Credentials': 'true',
-   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-   'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-};
+// const API_REQUEST_HEADERS = {
+//    'Content-Type': 'application/json',
+//    'Access-Control-Allow-Origin': `${$allowed_origin}`,
+//    'Access-Control-Allow-Credentials': 'true',
+//    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+//    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+// };
 
-const config = {
-   // method: 'get',
-   maxBodyLength: Infinity,
-   // url: `${BASE_API_URL}/breeds`,
-   headers: API_REQUEST_HEADERS,
-   orientation : 'horizontal',
-   safesearch : true,
-};
+// const config = {
+//    // method: 'get',
+//    maxBodyLength: Infinity,
+//    // url: `${BASE_API_URL}/breeds`,
+//    headers: API_REQUEST_HEADERS,
+//    orientation : 'horizontal',
+//    safesearch : true,
+// };
 
 // let API_KEY = '39898050-fc2f5ee7469f143421985ee86';
 	// let URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent('red roses');
