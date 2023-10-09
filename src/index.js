@@ -60,38 +60,72 @@ function render(hits, total, totalHits) {
   // catInfo.setAttribute('Style', 'Display: inline-flex; ');
   console.log('gallery: ', gallery);
 
+
+hits.forEach((item) => {
+
   const markupCard =      `<div class="photo-card">
-                             <img src="${hits[0].webformatURL}" alt="" loading="lazy" />
+                             <img src="${item.webformatURL}" alt="" loading="lazy" width="320px"; height="320px"/>
                              <div class="info">
                                <p class="info-item">
                                  <b>Likes</b><br>
-                                 ${hits[0].likes}
+                                 ${item.likes}
                                </p>
                                <p class="info-item">
                                  <b>Views</b><br>
-                                 ${hits[0].views}
+                                 ${item.views}
                                </p>
                                <p class="info-item">
                                  <b>Comments</b><br>
-                                 ${hits[0].comments}
+                                 ${item.comments}
                                </p>
                                <p class="info-item">
                                  <b>Downloads</b><br>
-                                 ${hits[0].downloads}
+                                 ${item.downloads}
                                </p>
                              </div>
                           </div>`
 
   gallery.insertAdjacentHTML('beforeend',markupCard);
-
-  let imgWidth = gallery.querySelector('img').width
-  console.log(imgWidth);
-  gallery.querySelectorAll('.info-item').forEach((item) => {
-    item.setAttribute('Style', 'margin: 20px;');
   });
-  gallery.querySelector('.info').setAttribute('Style', `display: flex; width: ${imgWidth}px;justify-content:space-around;`);
+  // const markupCard =      `<div class="photo-card">
+  //                            <img src="${hits[0].webformatURL}" alt="" loading="lazy" />
+  //                            <div class="info">
+  //                              <p class="info-item">
+  //                                <b>Likes</b><br>
+  //                                ${hits[0].likes}
+  //                              </p>
+  //                              <p class="info-item">
+  //                                <b>Views</b><br>
+  //                                ${hits[0].views}
+  //                              </p>
+  //                              <p class="info-item">
+  //                                <b>Comments</b><br>
+  //                                ${hits[0].comments}
+  //                              </p>
+  //                              <p class="info-item">
+  //                                <b>Downloads</b><br>
+  //                                ${hits[0].downloads}
+  //                              </p>
+  //                            </div>
+  //                         </div>`
+
+
+  // let imgWidth = gallery.querySelector('img').width
+  // console.log('width: ', imgWidth);
+
+  gallery.querySelectorAll('.info').forEach((item) => {
+    item.setAttribute('Style', 'margin: 20px; display: flex');
+
+});
+
+
+  // gallery.querySelector('.info').setAttribute('Style', `display: flex; width: ${imgWidth}px;justify-content:space-around;`);
+
+
+// document.querySelector('.gallery').setAttribute('Style', 'display: flex;');
 
   fragment.append(gallery);
+fragment.querySelector('.gallery').setAttribute('Style', 'display: flex; flex-wrap: wrap');
 
   const box = document.querySelector('.gallery');
   if (!box.hasChildNodes()) {
@@ -153,4 +187,3 @@ msgForm.addEventListener("submit", (e) => {
       });
   };
 });
-
