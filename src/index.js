@@ -64,11 +64,11 @@ function render(hits, total, totalHits) {
 hits.forEach((item) => {
 
   const markupCard =      `<div class="photo-card">
-                             <img src="${item.webformatURL}" alt="" loading="lazy" width="320px"; height="320px"/>
+                             <img src="${item.webformatURL}" alt="" loading="lazy" width="480px"; height="480px"/>
                              <div class="info">
                                <p class="info-item">
-                                 <b>Likes</b><br>
-                                 ${item.likes}
+                                 <b>Likes</b>
+                                 <span class="info-item-value" >${item.likes}</span>
                                </p>
                                <p class="info-item">
                                  <b>Views</b><br>
@@ -87,45 +87,25 @@ hits.forEach((item) => {
 
   gallery.insertAdjacentHTML('beforeend',markupCard);
   });
-  // const markupCard =      `<div class="photo-card">
-  //                            <img src="${hits[0].webformatURL}" alt="" loading="lazy" />
-  //                            <div class="info">
-  //                              <p class="info-item">
-  //                                <b>Likes</b><br>
-  //                                ${hits[0].likes}
-  //                              </p>
-  //                              <p class="info-item">
-  //                                <b>Views</b><br>
-  //                                ${hits[0].views}
-  //                              </p>
-  //                              <p class="info-item">
-  //                                <b>Comments</b><br>
-  //                                ${hits[0].comments}
-  //                              </p>
-  //                              <p class="info-item">
-  //                                <b>Downloads</b><br>
-  //                                ${hits[0].downloads}
-  //                              </p>
-  //                            </div>
-  //                         </div>`
 
 
-  // let imgWidth = gallery.querySelector('img').width
-  // console.log('width: ', imgWidth);
+gallery.querySelectorAll('.info-item-value').forEach((item) => {
+    item.setAttribute('Style', 'display: block;')
+  });
 
-  gallery.querySelectorAll('.info').forEach((item) => {
-    item.setAttribute('Style', 'margin: 20px; display: flex');
+  gallery.querySelectorAll('.info-item').forEach((item) => {
+
+    item.setAttribute('Style', 'margin: 20px;');
 
 });
 
+  gallery.querySelectorAll('.info').forEach((item) => {
+    item.setAttribute('Style', 'display:flex; justify-content: space-evenly;')
+  });
 
-  // gallery.querySelector('.info').setAttribute('Style', `display: flex; width: ${imgWidth}px;justify-content:space-around;`);
-
-
-// document.querySelector('.gallery').setAttribute('Style', 'display: flex;');
 
   fragment.append(gallery);
-fragment.querySelector('.gallery').setAttribute('Style', 'display: flex; flex-wrap: wrap');
+  fragment.querySelector('.gallery').setAttribute('Style', 'display: flex; flex-wrap: wrap; gap: 20px 20px');
 
   const box = document.querySelector('.gallery');
   if (!box.hasChildNodes()) {
