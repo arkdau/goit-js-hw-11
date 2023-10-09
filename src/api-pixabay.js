@@ -48,46 +48,17 @@ const BASE_API_URL = 'https://pixabay.com/api';
 
 // Making a GET request using an axios instance from a connected library
 
-export function fetchImages(q, page) {
-
-
-  console.log(page);
-
-//https://pixabay.com/api/?key=39898050-fc2f5ee7469f143421985ee86&q=yellow+flowers&image_type=photo
-// return  axios.get(`${BASE_API_URL}/images/search?breed_ids=${breedId}`, config)
-
-// return  axios.get(`${BASE_API_URL}/?key=39898050-fc2f5ee7469f143421985ee86q=yellow+flowers&image_type=photo`, config)
-
-  // https://pixabay.com/api/?key=${API_KEY}&q=travel&image_type=photo&pretty=true`
-
-return  axios.get(`${BASE_API_URL}/?key=${key}&q=${q}&image_type=${image_type}&per_page=40&page=${page}`)
-    .then(function (response) {
-        return response.data;
-    })
-    .catch(function (err) {
-      callbckError();
-      console.log('err: ', err);
-  });
+export async function fetchImages(q, page) {
+  try {
+    return await axios.get(`${BASE_API_URL}/?key=${key}&q=${q}&image_type=${image_type}&per_page=40&page=${page}`)
+        .then(function (response) {
+            return response.data;
+        })
+        .catch(function (err) {
+          callbckError();
+          console.log('err: ', err);
+      });
+  } catch (error) {
+    console.log("error");
+  }
 }
-
-// return  axios.get(URL, config)
-//     .then(function (response) {
-//         return response.data;
-//     })
-//     .catch(function (err) {
-//       callbckError();
-//       console.log('err: ', err);
-//   });
-// }
-
-// export function fetchBreeds(q) {
-//   return axios.get(`${BASE_API_URL}/breeds`, config)
-//     .then(function (response) {
-//       // console.log('return: ', response.data);
-//       return response.data;
-//       })
-//     .catch(function (err) {
-//       callbckError();
-//       console.log('err: ', err);
-//   });
-// }
