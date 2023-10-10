@@ -41,12 +41,16 @@ function render(hits) {
   const gallery = document.createElement('div')
   gallery.setAttribute('class', 'gallery');
 
-  console.log('gallery: ', gallery);
+  // const topBar = document.createElement('div');
+  // topBar.setAttribute('class', 'top-bar');
+  // topBar.setAttribute('Style', 'width: auto; height: 40px;');
 
+  console.log('gallery: ', gallery);
+  document.querySelector('.search-form').setAttribute('Style','background-color: green; padding: 10px 0;');
 
 hits.forEach((item) => {
 
-  const markupCard =      `<div class="photo-card">
+      const markupCard = `<div class="photo-card">
                              <img src="${item.webformatURL}" alt="" loading="lazy" width="450px"; height="450px"/>
                              <div class="info">
                                <p class="info-item">
@@ -78,7 +82,7 @@ gallery.querySelectorAll('.info-item-value').forEach((item) => {
 
   gallery.querySelectorAll('.info-item').forEach((item) => {
 
-    item.setAttribute('Style', 'margin: 20px;');
+    item.setAttribute('Style', 'margin: 20px; border: ');
 
 });
 
@@ -86,9 +90,23 @@ gallery.querySelectorAll('.info-item-value').forEach((item) => {
     item.setAttribute('Style', 'display:flex; justify-content: space-evenly;')
   });
 
+  gallery.querySelectorAll('.photo-card').forEach((card) => {
+      card.setAttribute(
+        'Style',
+         'box-shadow: 0 3px 10px 0 #aaa; cursor: pointer; height: 550px; width: 460px;'
+      )
+  });
+
+  gallery.querySelectorAll('img').forEach((image) => {
+      image.setAttribute('Style', 'padding: 5px;')
+  });
+
+  gallery.querySelectorAll('.search-form').forEach((item) => {
+      item.setAttribute('Style', 'box-shadow: 0 3px 10px 0 #aaa');
+  });
 
   fragment.append(gallery);
-  fragment.querySelector('.gallery').setAttribute('Style', 'display: flex; flex-wrap: wrap; gap: 20px 20px');
+  fragment.querySelector('.gallery').setAttribute('Style', 'display: flex; flex-wrap: wrap; gap: 20px 20px;margin:10px auto 20px auto;');
 
   const box = document.querySelector('.gallery');
   if (!box.hasChildNodes()) {

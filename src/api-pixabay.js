@@ -57,8 +57,8 @@ export async function fetchImages(q, page) {
         .catch(function (err) {
           callbckError();
           console.log('err: ', err);
-      });
+        });
   } catch (error) {
-    console.log("error");
+      console.log("error");
   }
 }
