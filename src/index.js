@@ -42,6 +42,7 @@ document.querySelector('.search-form').setAttribute('Style','background-color: g
 document.querySelector('.load-more').setAttribute('Style', 'padding: 20px 40px; background-color: green;color: white;display:none;')
 
 
+
 function render(hits) {
 
   // clear();
@@ -122,14 +123,16 @@ gallery.querySelectorAll('.info-item-value').forEach((item) => {
   box.replaceWith(fragment);
 
 
-const gallery_1 = new SimpleLightbox(' .gallery a', {
-    overlay: true,
-    overlayOpacity: 0.7,
-    spinner: true,
-    nav: true,
-    close: true,
-    loop: true,
-});
+// const gallery_1 = new SimpleLightbox('.gallery a', {
+//     overlay: true,
+//     overlayOpacity: 0.7,
+//     spinner: true,
+//     nav: true,
+//     close: true,
+//     loop: true,
+// });
+
+const gallery_1 = new SimpleLightbox('.gallery a');
 
 
 gallery_1.on('changed.simplelightbox', function () {
