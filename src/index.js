@@ -1,4 +1,7 @@
 const axios = require('axios');
+const SimpleLightbox = require('simplelightbox');
+
+import SimpleLightbox from "simplelightbox";
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -34,6 +37,11 @@ const status ={
   },
 };
 
+document.querySelector('.gallery');
+document.querySelector('.search-form').setAttribute('Style','background-color: green; padding: 10px 0;');
+document.querySelector('.load-more').setAttribute('Style', 'padding: 20px 40px; background-color: green;color: white;display:none;')
+
+
 function render(hits) {
 
   // clear();
@@ -41,17 +49,10 @@ function render(hits) {
   const gallery = document.createElement('div')
   gallery.setAttribute('class', 'gallery');
 
-  // const topBar = document.createElement('div');
-  // topBar.setAttribute('class', 'top-bar');
-  // topBar.setAttribute('Style', 'width: auto; height: 40px;');
-
-  console.log('gallery: ', gallery);
-  document.querySelector('.search-form').setAttribute('Style','background-color: green; padding: 10px 0;');
-
 hits.forEach((item) => {
 
-      const markupCard = `<div class="photo-card">
-                             <img src="${item.webformatURL}" alt="" loading="lazy" width="450px"; height="450px"/>
+      const markupCard = `<a class="gallery__item" href="${item.webformatURL}"><div class="photo-card">
+                             <img class="gallery__image" src="${item.webformatURL}" alt="" loading="lazy" width="450px"; height="450px"/></a>
                              <div class="info">
                                <p class="info-item">
                                  <b>Likes</b>
@@ -105,15 +106,34 @@ gallery.querySelectorAll('.info-item-value').forEach((item) => {
       item.setAttribute('Style', 'box-shadow: 0 3px 10px 0 #aaa');
   });
 
+  document.querySelector('.load-more').setAttribute('Style', 'padding: 20px 40px; background-color: green;color: white;display:inline-blocks;')
+
   fragment.append(gallery);
   fragment.querySelector('.gallery').setAttribute('Style', 'display: flex; flex-wrap: wrap; gap: 20px 20px;margin:10px auto 20px auto;');
-
+//
   const box = document.querySelector('.gallery');
-  if (!box.hasChildNodes()) {
-    box.appendChild(fragment);
-  }else {
-    box.replaceWith(fragment);
-  };
+  // if (!box.hasChildNodes()) {
+  //   box.appendChild(fragment);
+  // }else {
+  //   box.replaceWith(fragment);
+  // };
+  box.replaceWith(fragment);
+
+const gallery_1 = new SimpleLightbox(' .gallery a', {
+});
+
+
+gallery_1.on('changed.simplelightbox', function () {
+	const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: "smooth",
+});
+});
+
 }
 
 const msgForm = document.querySelector('.search-form');
