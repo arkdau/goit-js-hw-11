@@ -1,7 +1,10 @@
 const axios = require('axios');
-const SimpleLightbox = require('simplelightbox');
+// const SimpleLightbox = require('simplelightbox');
 
 import SimpleLightbox from "simplelightbox";
+// import 'simplelightbox/dist/simple-lightbox.min.css';
+
+
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -133,7 +136,12 @@ gallery.querySelectorAll('.info-item-value').forEach((item) => {
 //     loop: true,
 // });
 
-const gallery_1 = new SimpleLightbox('.gallery a');
+const gallery_1 = new SimpleLightbox('.gallery a', {
+    maxZoom:3,
+    widthRatio: 0.8,
+    heightRatio: 0.9,
+    scaleImageToRatio: true,
+  });
 
 
 gallery_1.on('changed.simplelightbox', function () {
