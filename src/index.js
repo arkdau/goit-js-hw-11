@@ -51,8 +51,9 @@ function render(hits) {
 
 hits.forEach((item) => {
 
-      const markupCard = `<a class="gallery__item" href="${item.webformatURL}"><div class="photo-card">
-                             <img class="gallery__image" src="${item.webformatURL}" alt="" loading="lazy" width="450px"; height="450px"/></a>
+      const markupCard = `<div class="photo-card">
+                           <a class="gallery__item" href="${item.webformatURL}">
+                             <img class="gallery__image" src="${item.webformatURL}" alt="" loading="lazy" width="450px"; height="450px"/><a/>
                              <div class="info">
                                <p class="info-item">
                                  <b>Likes</b>
@@ -71,6 +72,7 @@ hits.forEach((item) => {
                                  ${item.downloads}
                                </p>
                              </div>
+
                           </div>`
 
   gallery.insertAdjacentHTML('beforeend',markupCard);
@@ -119,7 +121,14 @@ gallery.querySelectorAll('.info-item-value').forEach((item) => {
   // };
   box.replaceWith(fragment);
 
+
 const gallery_1 = new SimpleLightbox(' .gallery a', {
+    overlay: true,
+    overlayOpacity: 0.7,
+    spinner: true,
+    nav: true,
+    close: true,
+    loop: true,
 });
 
 
