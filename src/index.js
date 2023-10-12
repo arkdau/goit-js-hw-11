@@ -186,6 +186,7 @@ function render(hits) {
     if (status.getPage() === 1) {
       box.replaceWith(fragment);
       btnLoadMore.setAttribute('Style', 'display:none;');
+      Notify.info("We're sorry, but you've reached the end of search results.");
     }
   };
 
@@ -194,6 +195,7 @@ function render(hits) {
     if (status.getPage() === status.getTotalPage()) {
       box.append(fragment);
       btnLoadMore.setAttribute('Style', 'display:none;');
+      Notify.info("We're sorry, but you've reached the end of search results.");
     }else {
       if (status.getPage() === 1) {
         box.replaceWith(fragment);
@@ -224,7 +226,7 @@ msgForm.addEventListener("submit", (e) => {
   q = form.elements.searchQuery.value;
 
   if (q === '') {
-    alert('email adres - puste pole.\nUzupełnij brakujące dane.');
+    alert('search text - empty field.\nComplete the missing data.');
   }else {
     form.reset();
     status.query = q;
@@ -236,6 +238,7 @@ msgForm.addEventListener("submit", (e) => {
           const hits = value.hits;
           const totalHits = value.totalHits;
           status.setTotalHits(totalHits);
+          Notify.success(`Hooray! We found ${totalHits} images.`);
           console.log('TOTAL PAGE: ', status.tatalPage);
           console.log('PAGE: ',status.page)
           render(hits);
